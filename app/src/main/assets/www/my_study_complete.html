@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>면접통</title>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/common_180722.css">
+	<link rel="stylesheet" type="text/css" href="css/video-js.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-confirm.min.css">
+	<link rel="stylesheet" type="text/css" href="css/circle-progress.css">
+
+	<!--- 로딩화면 --->
+	<style>
+	.page_loader {position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999;background: url('images/page_loading.png') 50% 50% no-repeat rgb(249,249,249); opacity: 0.9;}
+	</style>
+	<!--- 로딩화면 --->
+</head>
+
+<body>
+<!--- 로딩화면 --->
+<h3 class="page_loader"></h3>
+<!--- 로딩화면 --->
+
+<!-- 헤더영역 -->
+<div class="top-navbar green">
+	<div class="top-navbar-left">
+		<a>
+		</a>
+	</div>
+
+	<div class="top-navbar-right">
+		<a>
+			<img src="images/btn_close.png" class="btn_close" onclick="webview.Close();">
+		</a>
+	</div>
+
+	<div class="site-title">
+		<h1>학습완료</h1>
+	</div>
+</div>
+<!-- 헤더영역 -->
+
+<div class="fixed_5060_nobottom bg_green">
+	<div class="animated fadeInUp">
+		<div class="top_study_complete">
+			<img src="images/icon_study_complete.png">
+			<h5>학습이 완료되었습니다.</h5>
+			학습결과는 단말기(폰)에 저장 됩니다.<br>
+			내 폰에 저장된 결과는 단말기 변경시 복구가 불가하므로<br>서버에 저장할 것을 권장합니다.<br>
+		</div>
+		<ul class="list_stydy_complete pad_15" id="ResultUseInterviewInfoArea">
+			<!--  내용 -->	
+		</ul>
+
+
+
+	</div>
+</div>
+
+
+<!----- 코칭신청 ------->
+<div class="pop_coching">
+	<div class="coching_in">
+		<div class="top">
+			<img src="images/btn_close_black.png" class="btn_close" onclick="CloseCoachingType()">
+			<br><b>코칭 신청 하기</b>
+		</div>
+
+		<div class="txt" style="padding-left:0px;">
+			<div style="width:90%;margin:20px auto;height:50px;line-height:50px;background-color:#295E8A;text-align:center;border-radius:5px;font-weight:bold;color:#ffffff;" onclick="ApplyCoaching(1)">문자 코칭</div>
+			<div style="width:90%;margin:10px auto;height:50px;line-height:50px;background-color:#295E8A;text-align:center;border-radius:5px;font-weight:bold;color:#ffffff;" onclick="ApplyCoaching(2)">전화 코칭</div>
+			<div style="width:90%;margin:20px auto;height:50px;line-height:50px;background-color:#295E8A;text-align:center;border-radius:5px;font-weight:bold;color:#ffffff;" onclick="ApplyCoaching(3)">대면 코칭</div>
+		</div>
+	</div>
+</div>
+<!----- 코칭신청 ------->
+
+<div id="UploadProgressBoxLayer" class="pop_progress_bar" style="display:none;text-align:center;">
+	<div class="c100 p1" id="DivUploadProgressBox" style="margin:0 auto; top:250px;">
+		<span id="DivUploadProgress">0%</span>
+		<div class="slice">
+			<div class="bar"></div>
+			<div class="fill"></div>
+		</div>
+	</div>
+</div>
+<style>
+html, body{height:100%;}
+.pop_progress_bar{position:fixed; text-align:center; width:100%; height:100%; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.3); z-index:110;}
+</style>
+
+
+
+<!-- ========================= javascript ========================= -->
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/video.js"></script>
+<script type="text/javascript" src="js/app_menu.js"></script>
+<script type="text/javascript" src="js/app_init.js"></script>
+<script type="text/javascript" src="js/app_media_upload.js"></script>
+<script type="text/javascript" src="js/jquery-confirm.min.js"></script>
+
+<script type="text/javascript" src="vimeo/upload-cordova.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+var MemberID = 0;
+var LocalTempResultUseInterviewID = 0;
+var ResultUseInterviewID = 0;
+var ServerSaved = "N";
+var TargetSaveVideo = "||";
+var TargetSaveAudio = "||";
+
+
+
+function OpenAdPage(){
+	if (ResultUploading==1){
+		return false;
+	}else{
+		//location.href = "my_study_ad_page.html";
+	}
+}
+
+function onBackKeyDown() {
+	OpenAdPage();
+}
+
+function GetAssessmentStatus(){
+	//app_media_upload.js 에서 호출되지만 이 파일에서는 무시. my_study_result_read.html 에서만 사용됨.
+}
+
+$(document).ready(function () {
+	document.addEventListener("backbutton", onBackKeyDown, false);
+
+	$(".page_loader").fadeOut("slow");
+
+	LocalTempResultUseInterviewID = localStorage.getItem(AppLocalStorageID+"TempResultUseInterviewID");
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+
+	//LocalTempResultUseInterviewID = 81;
+	//LocalMemberID = 10;
+
+	MemberID = LocalMemberID;
+	ResultUseInterviewID = LocalTempResultUseInterviewID;
+
+	GetResultUseInterviewInfo(1);
+
+});
+
+</script>
+<!-- ========================= javascript ========================= -->
+
+</body>
+</html>

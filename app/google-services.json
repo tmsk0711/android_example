@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "265946161711",
+    "firebase_url": "https://myinterview-uiwang.firebaseio.com",
+    "project_id": "myinterview-uiwang",
+    "storage_bucket": "myinterview-uiwang.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265946161711:android:a4ba27aa88ec1a2b",
+        "android_client_info": {
+          "package_name": "kr.ahsol.myinterview_uiwang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265946161711-pjeq2bq0mickpgm63ssbbv9k97cku1o8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kr.ahsol.myinterview_uiwang",
+            "certificate_hash": "9eefb6d3ccb12825535b00d39d5be5bb6c15242f"
+          }
+        },
+        {
+          "client_id": "265946161711-6gihkcdh00vcplofo1fjt3gbo2s26tdm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-iedeDITJUEpvtbh64839OxwQbdJH6X0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265946161711-6gihkcdh00vcplofo1fjt3gbo2s26tdm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,195 @@
+﻿@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+*{margin:0; padding:0; outline:none;}
+li{list-style:none;}
+a{text-decoration:none; highlight-color:transparent;}
+
+img{border:0;}
+
+body{font-family:'Noto Sans KR', sans-serif;}
+textarea{font-family:'Noto Sans KR', sans-serif;}
+
+/******* 이미지 반응형 비율 유지  *******/
+.hidden{width:100%; object-fit:cover;}
+
+/******* 바디 wrap 관련 / 바디 패딩 관련 *******/
+.fixed_5060{position:fixed; left:0; top:50px; right:0; bottom:60px; overflow:auto;}
+.fixed_5044{position:fixed; left:0; top:50px; right:0; bottom:44px; overflow:auto;}
+.fixed_5060_nobottom{position:fixed; left:0; top:50px; right:0; bottom:10px; overflow:auto;}
+.fixed_0060{position:fixed; left:0; top:0; right:0; bottom:60px; overflow:auto;}
+.fixed_5000{position:fixed; left:0; top:50px; right:0; bottom:0; overflow:auto;}
+.fixed_6560{position:fixed; left:3.5%; top:65px; right:3.5%; bottom:60px; overflow:auto;}
+.fixed_6512{position:fixed; left:3.5%; top:65px; right:3.5%; bottom:120px; overflow:auto;}
+.fixed_7012{position:fixed; left:3.5%; top:80px; right:3.5%; bottom:120px; overflow:auto;}
+
+.pad_15{padding:15px 3.5%;}
+
+/******* 바디 배경색상 관련 *******/
+.bg_sea{background-color:#b5e0db;}
+.bg_gray{background-color:#f6f6f6;}
+.bg_orange{background-color:#fee87c;}
+.bg_green{background-color:#cde7b8;}
+.bg_sky{background-color:#b0e0f2;}
+
+/******* 버튼 관련 *******/
+.txt_center{text-align:center;}
+.txt_right{text-align:right;}
+
+.btn{display:inline-block; text-align:center;}
+.gray{background-color:#363636; color:#fff;}
+.white{background-color:#fff; color:#000;}
+.sky{background-color:#25a8de; color:#fff;}
+.sea{background-color:#4AB0A4; color:#fff;}
+.green{background-color:#8eaf74; color:#fff;}
+.blue{background-color:#3875a8; color:#fff;}
+.orange{background-color:#ffaa31; color:#fff;}
+.light_gray{background-color:#ededed; color:#383838;}
+.mid_gray{background-color:#bcbec0; color:#fff;}
+.rtn_5{border-radius:5px;}
+.br_gray{border:1px solid #d0d0d0;}
+
+/******* 헤더 색상 *******/
+.hd_black{background-color:#313a43;}
+
+/******* 탭메뉴 관련 *******/
+.tab_navi{overflow:hidden; padding:0;}
+.tab_navi li{float:left; text-align:center; list-style:none;}
+
+/******* 로그인 *******/
+.login{padding:0; background:url(../images/bg_login_adm.png) no-repeat top; background-size:30%;}
+
+.login_area{height:290px; width:320px; position:absolute; left:50%; bottom:2%; margin-left:-160px;}
+.login_top{color:#363636; text-align:center; letter-spacing:-1px; margin:0 auto;}
+.login_top h1{font-weight:400; margin-bottom:10px; font-size:25px;}
+.login_top b{font-weight:500;}
+
+.login_mid{margin:20px auto 0 auto;}
+.login_mid .id, .login_mid .pw{overflow:hidden; background:#fff; border:1px solid #c0c0c0;}
+.login_mid img{width:16px; margin:8px 0 0 10px;}
+.login_mid input[type=text], .login_mid input[type=email], .login_mid input[type=password]{width:calc(100% - 35px); height:34px; border:0; padding-left:5px; box-sizing:border-box; background-repeat:no-repeat; background-size:14px; background-position:12px 9px; color:#333; float:right;}
+.login_mid .id{margin-bottom:4px;}
+.login_mid .pw{margin-bottom:10px;}
+
+.login .btn{width:100%; height:34px; line-height:34px; font-size:14px; font-weight:500; background-color:#313a43; color:#fff;}
+.id_pw{overflow:hidden; padding-top:10px; font-weight:300;}
+.id_pw .left{float:left; padding-top:2px;}
+.id_pw input[type=checkbox]{display:none;}
+.id_pw label{padding-left:22px; position:relative; font-size:11px; vertical-align:top; margin-right:10px;}
+.id_pw label span{position:absolute; width:16px; height:16px; background-color:#fff; left:0; top:0; border:1px solid #c0c0c0;}
+.id_pw input[type=checkbox]:checked + label span{background-image:url(../images/check_black.png); background-size:100%;}
+.id_pw .btn_idpw{float:right; font-size:11px; font-weight:300; width:64px; height:20px; line-height:18px; border:1px solid #c0c0c0; text-align:center; color:#000;}
+
+.login_bottom{margin:35px auto 0 auto; text-align:center;}
+.login_bottom img{width:27%;}
+
+@media all and (max-width:1024px) {
+.login{background-size:45%;}
+}
+@media all and (max-width:768px) {
+.login{background-size:100%;}
+}
+
+/******* 헤더영역 *******/
+header{position:fixed; left:0; right:0; top:0; height:50px; background-color:#fff; z-index:1000; box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+header h3{text-align:center; line-height:50px; font-weight:500;}
+header .left, header .right{position:absolute;}
+header .left{left:12px; top:14px;}
+header .right{right:12px; top:15px;}
+header .left img{width:11px;}
+header .right img{width:24px;}
+header .close{top:17px;}
+header .close img{width:17px;}
+header .sns{top:14px;}
+header .sns img{width:19px;}
+.btn_home{width:24px;}
+.btn_close{width:17px;}
+.btn_sns{width:19px; margin-top:5px;}
+.btn_prev{width:11px;}
+
+/******* 평가하기_항목 없을 경우 *******/
+.evaluation_no .up{text-align:center; padding:80px 0 85px 0;}
+.evaluation_no .up h5{font-weight:500; color:#adadad; padding-top:15px;}
+.evaluation_no .up img{width:24%;}
+
+.evaluation_no .down h6{font-weight:500; color:#565656; padding-bottom:15px; letter-spacing:-0.5px; text-align:center;}
+.evaluation_no table{width:100%; border-spacing:0; font-size:14px; color:#595959;}
+.evaluation_no th{width:45px;  text-align:right;}
+.evaluation_no th img{width:25px;}
+.evaluation_no td{line-height:1.4; padding:15px 0 15px 10px;}
+.evaluation_no .bg{background-color:#f0f0f0;}
+
+/******* 평가하기 항목 *******/
+.eva_list{background-color:#fff; border:1px solid #e7e7e7; padding:15px; margin-bottom:10px;}
+.eva_list:last-child{margin-bottom:0;}
+.eva_list ul{padding:0; margin-bottom:10px;}
+.eva_list li{list-style:none; padding:8px 5px; border-bottom:1px solid #e7e7e7;}
+.eva_list li:first-child{padding-top:2px;}
+.eva_list b{font-size:18px; padding-right:5px; font-weight:500;}
+
+.eva_list .btn{display:block; padding:8px 0; font-weight:500; font-size:16px;}
+
+/******* 내 평가내역 *******/
+.eva_my h6{font-size:13px; padding:0 0 10px 4px; color:#111;}
+.eva_my_list{padding:0; margin-bottom:15px;}
+.eva_my_list:last-child{margin-bottom:0;}
+.eva_my_list li{list-style:none; background-color:#fff; border:1px solid #e7e7e7; padding:10px; margin-bottom:10px;}
+.eva_my_list table{width:100%; border-collapse:separate; border-spacing:5px; color:#383838; font-size:14px;}
+.eva_my_list th{background-color:#25a8de; color:#fff; font-size:20px; width:78px; text-align:center;}
+.eva_my_list td{border-bottom:1px solid #e7e7e7; padding:2px 0 5px 4px;}
+.eva_my_list b{font-size:17px; padding-right:4px; font-weight:500;}
+
+/******* 평가하기 탭메뉴 *******/
+.tab_result{padding:0; line-height:40px; height:40px;}
+.tab_result li{list-style:none; float:left; width:33.3%; text-align:center; text-align:center; background-color:#f6f6f6; font-weight:500; position:relative;}
+.tab_result li:nth-child(2){width:33.4%;}
+.tab_result a{color:#333;}
+.tab_result span{position:absolute; bottom:0; left:0; right:0; height:2px; background-color:#333;}
+
+/******* 평가하기 *******/
+.question_area{position:relative; height:200px; background-color:#fff; text-align:center; padding:15px 0 0 0; box-sizing:border-box; color:#333; border-bottom:1px solid #e7e7e7;}
+.question_area .img{width:40px;}
+.question_area .caption{font-size:14px;}
+.question_area span{display:inline-block; width:20px; height:2px; background-color:#333; position:relative; top:-10px;}
+.question_area .question{font-weight:500;}
+
+.btn_area{overflow:hidden; position:absolute; bottom:10px; left:5%; right:5%; height:30px;}
+.btn_area .left{float:left;}
+.btn_area .right{float:right;}
+.btn_area .btn{padding:4px 8px; font-size:12px; color:#fff; background-color:rgba(0,0,0,0.85); border-radius:2px;}
+.btn_area span.btn{color:#fff; background-color:rgba(210,210,210,0.85);}
+.btn_area .btn img{width:6px; vertical-align:-1px; margin:0 1px;}
+
+.result_area_2{background-color:;}
+.result_area_2 .tab_navi li{width:33.3%; height:38px; line-height:36px; font-size:14px; font-weight:500; position:relative;}
+.result_area_2 .tab_navi a{display:block; background-color:#fff; color:#5d5d5d;}
+.result_area_2 .tab_navi .active{color:#313a43;}
+.result_area_2 .tab_navi .active + span{position:absolute; left:0; right:0; bottom:0; height:2px; background-color:#313a43;}
+
+.result_tab{padding:10px; text-align:justify; font-size:14px; position:relative;}
+.result_tab > div{display:none; background-color:#fff; padding:10px;}
+
+.btn_fixed_2{position:fixed; bottom:0; left:0; right:0; height:44px; line-height:44px; text-align:center; z-index:50;}
+.btn{display:block; font-size:16px;}
+
+/******* 팝업 평가하기 *******/
+.pop_eva{position:fixed; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.75); z-index:99; display:none;}
+.pop_eva .btn_close{position:fixed; top:5%; right:6%;}
+.eva_in{position:fixed; top:9%; left:5%; right:5%; bottom:5%; background-color:#f6f6f6; overflow:auto; padding:10px 10px 40px 10px;}
+.eva_in .btn{position:absolute; bottom:0; left:0; right:0; height:38px; line-height:38px;}
+.eva_in table{border-spacing:0; width:100%; border-collapse:collapse; color:#333;}
+.eva_in th, .eva_in td{border:1px solid #d9d9d9; text-align:center; font-weight:500; font-size:12px; padding:0; height:30px;}
+.eva_in th{background-color:#f6f6f6; letter-spacing:-0.5px;}
+.eva_in h6{color:#333; padding:20px 0 10px 2px; font-weight:500; font-size:13px;}
+.eva_in textarea{border:1px solid #d9d9d9; padding:5px; width:100%; height:150px; font-size:13px;}
+
+.chk input[type=radio]{display:none;}
+.chk label{}
+.chk label span{display:inline-block; width:16px; height:16px; background-color:#eaeaea; margin-bottom:-3px;}
+.chk input[type=radio]:checked + label span{background-image:url(../images/check_black.png); background-size:100%;}
+
+
+/******* 생략 CSS *******/
+.ellipsis{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}

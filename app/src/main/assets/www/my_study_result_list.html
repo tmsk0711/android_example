@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>면접통</title>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/common_180722.css">
+	<link rel="stylesheet" type="text/css" href="css/video-js.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-confirm.min.css">
+</head>
+
+<body>
+
+<div class="top-navbar sea">
+	<div class="top-navbar-left">
+		<a>
+
+		</a>
+	</div>
+
+	<div class="top-navbar-right">
+		<a>
+			<img src="images/btn_close.png" class="btn_close" onclick="webview.Close();">
+		</a>
+	</div>
+
+	<div class="site-title">
+		<h1>면접결과보기</h1>
+	</div>
+</div>
+
+<div class="fixed_5060_nobottom bg_sea pad_15">
+	<div class="animated fadeInUp">
+		<div class="txt_result">
+			<div class="left" id="ResultUseInterviewCount"><!--총 4건--></div>
+			<div class="right">
+				<!--
+				<select class="select">
+					<option>전체</option>
+					<option>심층면접</option>
+				</select>
+				-->
+			</div>
+		</div>
+		<!------- 답변 진행중 color_1 / 답변확인완료 color_2 / 답변작성완료 color_3 / 학습완료 color_4 ------>
+		<ul class="result_list" id="ResultUseInterviewList">
+			
+			<!--
+			<li>
+				<img src="images/sample_mento_1.jpg" class="profile">
+				<div class="mid">
+					<h4>평가자 : <b>남궁은지</b></h4>
+					<div class="num">학습번호 201806031234</div>
+					<div class="part">학습분야 : 심층면접</div>
+					<div class="date">학습일 : 2018년06월02일</div>
+				</div>
+				<span class="confirm color_1">답변<br>진행중</span>
+			</li>
+			<li>
+				<img src="images/sample_mento_2.jpg" class="profile">
+				<div class="mid">
+					<h4>평가자 : <b>남궁은지</b></h4>
+					<div class="num">학습번호 201806031234</div>
+					<div class="part">학습분야 : 심층면접</div>
+					<div class="date">답변확인일 : 2018년06월02일</div>
+				</div>
+				<span class="confirm color_2">답변<br>확인완료</span>
+			</li>
+			<li>
+				<img src="images/sample_mento_1.jpg" class="profile">
+				<div class="mid">
+					<h4>평가자 : <b>남궁은지</b></h4>
+					<div class="num">학습번호 201806031234</div>
+					<div class="part">학습분야 : 심층면접</div>
+					<div class="date">답변작성일 : 2018년06월02일</div>
+				</div>
+				<a href="my_study_result_read.html" class="confirm color_3">답변<br>작성완료</a>
+			</li>
+			<li>
+				<img src="images/sample_mento_2.jpg" class="profile">
+				<div class="mid">
+					<h4>평가자 : <b>남궁은지</b></h4>
+					<div class="num">학습번호 201806031234</div>
+					<div class="part">학습분야 : 심층면접</div>
+					<div class="date">학습완료일 : 2018년06월02일</div>
+				</div>
+				<a href="my_study_result_read.html" class="confirm color_4">학습<br>완료</a>
+			</li>
+			-->
+		</ul>
+	</div>
+</div>
+
+
+
+
+<!-- ========================= javascript ========================= -->
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/video.js"></script>
+<script type="text/javascript" src="js/app_menu.js"></script>
+<script type="text/javascript" src="js/app_init.js"></script>
+<script type="text/javascript" src="js/jquery-confirm.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+function GetMemberInfoWebView(MemberID){
+	var json_url = AppDomain + AppPath + "/jsonp_get_member_info.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+
+	$.getJSON( json_url, {
+		format: "json"
+	})
+	.done(function( data ) {
+		MemberID = data.MemberID;
+		LoginMemberID = data.LoginMemberID;
+		MemberName = data.MemberName;
+		MemberLevelID = data.MemberLevelID;
+	}).fail(function() {
+		
+	});
+
+	if (MemberID==""){
+		webview.Close();
+	}
+}
+
+function GetResultList(MemberID){
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_interview_result_list.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+		document.getElementById("ResultUseInterviewCount").innerHTML = "총 "+data.ResultUseInterviewCount+"건";
+		document.getElementById("ResultUseInterviewList").innerHTML = data.ResultUseInterviewList;
+	}).fail(function() {
+		
+	});
+}
+
+function OpenProductInterviewResultDetail(ResultUseInterviewID){
+	localStorage.setItem(AppLocalStorageID+"TempResultUseInterviewID", ResultUseInterviewID);
+	location.href = "my_study_result_read.html";
+}
+
+
+window.onload = function(){
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	if (LocalMemberID==null){
+		LocalMemberID = "";
+	}
+	GetMemberInfoWebView(LocalMemberID);
+	GetResultList(LocalMemberID);
+}
+</script>
+<!-- ========================= javascript ========================= -->
+
+</body>
+</html>

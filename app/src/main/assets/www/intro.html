@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link rel="apple-touch-icon" sizes="57x57" href="intro/assets/img/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="intro/assets/img/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="intro/assets/img/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="intro/assets/img/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="intro/assets/img/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="intro/assets/img/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="intro/assets/img/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="intro/assets/img/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="intro/assets/img/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="intro/assets/img/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="intro/assets/img/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="intro/assets/img/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="intro/assets/img/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="intro/assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="msapplication-TileImage" content="intro/assets/img/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Indra</title>
+
+    <link rel="stylesheet" href="intro/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="intro/bower_components/framework7/dist/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="intro/bower_components/swipebox/src/css/swipebox.css">
+    <link rel="stylesheet" href="intro/bower_components/owl-carousel/owl-carousel/owl.carousel.css">
+    <link rel="stylesheet" href="intro/bower_components/owl-carousel/owl-carousel/owl.theme.css">
+
+    <link rel="stylesheet" href="intro/assets/css/app.css">
+    <link rel="stylesheet" href="intro/css/common.css">
+    </head>
+<body onload="hidePreloader()">
+
+
+
+
+
+
+
+<!-- Views -->
+<div class="views">
+    <div class="view view-main">
+
+        <div class="pages navbar-fixed toolbar-fixed ">
+            <div data-page="index" class="page">
+                <div class="page-content navbar-fix">
+                    <div class="full-page-image full-page-video play-bg-video">
+                        <div class="logo" style="margin-top:250px;">
+                            <img src="images/login_top_uiwang.png" alt="logo">
+                        </div>
+                        <div class="desc content-padding">
+                            <strong class="">하루 10분으로 면접 준비하기!</strong>
+                        </div>
+                        <div class="row content-padding">
+                            <div class="col-100">
+                                <a onclick="window.Exit=true" class="intro_btn">SKIP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="deviceready" style="display:none;"></div>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="intro/bower_components/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+//폰트 사이즈 고정
+if(window.MobileAccessibility){
+	window.MobileAccessibility.usePreferredTextZoom(false);
+}
+//폰트 사이즈 고정
+
+var app = {
+	initialize: function() {
+		document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+	},
+	onDeviceReady: function() {
+		this.receivedEvent('deviceready');
+	},
+	receivedEvent: function(id) {
+
+	}
+};
+app.initialize();
+
+
+</script>
+
+<script type="text/javascript" src="intro/bower_components/framework7/dist/js/framework7.min.js"></script>
+<script type="text/javascript" src="intro/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="intro/bower_components/Tweetie/tweetie.min.js"></script>
+<script type="text/javascript" src="intro/bower_components/chartjs/Chart.js"></script>
+<script type="text/javascript" src="intro/bower_components/scrollAnimate/jquery.scrollAnimate.js"></script>
+<script type="text/javascript" src="intro/bower_components/owl-carousel/owl-carousel/owl.carousel.min.js"></script>
+<script type="text/javascript" src="intro/bower_components/vide/dist/jquery.vide.min.js"></script>
+
+<script type="text/javascript" src="intro/assets/js/jflickrfeed.min.js"></script>
+<script type="text/javascript" src="intro/assets/js/min/app.js"></script>
+<script type="text/javascript" src="intro/assets/js/animations.js"></script>
+
+</body>
+</html>

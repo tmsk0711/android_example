@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>면접통</title>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/common_180722.css">
+	<link rel="stylesheet" type="text/css" href="css/video-js.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-confirm.min.css">
+</head>
+
+<body>
+
+
+<div class="top-navbar green">
+	<div class="top-navbar-left">
+		<a>
+
+		</a>
+	</div>
+
+	<div class="top-navbar-right">
+		<a>
+			<img src="images/btn_close.png" class="btn_close" onclick="webview.Close();">
+		</a>
+	</div>
+
+	<div class="site-title">
+		<h1>면접학습하기</h1>
+	</div>
+</div>
+
+
+<div class="fixed_5060_nobottom bg_green pad_15">
+	<div class="animated fadeInUp">
+		<div class="txt_guide">
+			<div class="top"><img src="images/icon_bang_green.png">학습할 면접 콘텐츠를 선택하세요!</div>
+			<div class="down"><!--오늘학습가능수 : <b>2</b>개 / 평가가능수 <b>3</b>개--></div>
+		</div>
+		<ul class="list_cate_2" id="ProductInterviewList">
+			<!-- 리스트 내용 -->
+		</ul>
+	</div>
+</div>
+
+
+
+
+
+<!-- ========================= javascript ========================= -->
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/video.js"></script>
+<script type="text/javascript" src="js/app_menu.js"></script>
+<script type="text/javascript" src="js/app_init.js"></script>
+<script type="text/javascript" src="js/jquery-confirm.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+function GetMemberInfoWebView(MemberID){
+	var json_url = AppDomain + AppPath + "/jsonp_get_member_info.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+
+	$.getJSON( json_url, {
+		format: "json"
+	})
+	.done(function( data ) {
+		MemberID = data.MemberID;
+		LoginMemberID = data.LoginMemberID;
+		MemberName = data.MemberName;
+		MemberLevelID = data.MemberLevelID;
+	}).fail(function() {
+		
+	});
+
+	if (MemberID==""){
+		webview.Close();
+	}
+}
+
+function GetStudyList(MemberID, ProductInterviewCategoryID){
+	//var JsonUrl = AppDomain + AppPath + "/jsonp_get_interview_ready_list.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&ProductInterviewCategoryID="+ProductInterviewCategoryID+"&callback=?";
+
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_interview_favorite_list.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+	
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+		document.getElementById("ProductInterviewList").innerHTML = data.ProductInterviewList;
+	}).fail(function() {
+		
+	});
+}
+
+function OpenProductInterviewForm(ProductInterviewID, ResultUseInterviewID){
+	$.confirm({
+		title: '안내',
+		content: '새 학습을 시작 하시겠습니까?',
+		buttons: {
+			확인: function () {
+				localStorage.setItem(AppLocalStorageID+"TempProductInterviewID", ProductInterviewID);
+				localStorage.setItem(AppLocalStorageID+"TempResultUseInterviewID", ResultUseInterviewID);//0:시작 숫자:학습중, 완료된 학습, 여기서는 무조건 0
+				location.href = "my_study_form.html";
+			},
+			취소: function () {
+				//취소
+			}
+		}
+	});
+}
+
+
+function OpenProductInterviewFormErr(){
+	$.confirm({
+		title: '안내',
+		content: '면접 콘텐츠를 준비중 입니다.',
+		buttons: {
+			확인: function () {
+
+			}
+		}
+	});
+}
+
+
+window.onload = function(){
+	
+	localStorage.setItem(AppLocalStorageID+"LocalTempDemoService", "0");//체험하기가 아닙니다.
+
+	LocalTempProductInterviewCategoryID = localStorage.getItem(AppLocalStorageID+"TempProductInterviewCategoryID");
+	//window.localStorage.removeItem("TempProductInterviewCategoryID");
+
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	if (LocalMemberID==null){
+		LocalMemberID = "";
+	}
+	GetMemberInfoWebView(LocalMemberID);
+	GetStudyList(LocalMemberID, LocalTempProductInterviewCategoryID);
+}
+</script>
+<!-- ========================= javascript ========================= -->
+
+</body>
+</html>

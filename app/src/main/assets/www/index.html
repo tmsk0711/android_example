@@ -1,0 +1,839 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>면접통</title>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/common_180722.css">
+	<link rel="stylesheet" type="text/css" href="css/video-js.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-confirm.min.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<style>
+	/* 떠다니는 메뉴 (Floating Menu) */
+	 #floatdiv { 
+		position:fixed; position:absolute; z-index:10000;
+		width:170px;
+		overflow:hidden;
+		right:10px; /*//화면 왼쪽에 위치한다. right로 변경가능*/
+		bottom:100px; /*//화면 위쪽과의 간격*/
+		background-color: transparent;
+		margin:0;
+		padding:0;
+	}
+
+	#floatdiv ul  { list-style: none; }
+	#floatdiv li  { margin-bottom: 2px; text-align: center; }
+	#floatdiv a   { color: #5D5D5D; border: 0; text-decoration: none; display: block; }
+	#floatdiv a:hover, #floatdiv .menu  { background-color: #5D5D5D; color: #fff; }
+	#floatdiv .menu, #floatdiv .last    { margin-bottom: 0px; }
+
+	</style>
+
+</head>
+<body id="DivBody">
+<!--<body class="login"> -->
+
+<div class="login_area animated fadeInUp" id="DivLoginForm" style="display:none;">
+	<div class="login_top">
+		<img src="images/login_top_uiwang.png">
+		<h1>의왕시 <b>면접통</b></h1>
+		<span>하루 10분으로 면접 준비하기</span>
+	</div>
+	<form name="LoginForm" method="post" id="LoginForm" autocomplete="off" style="margin-top:60px;">
+		<div class="login_mid" id="LoginFormBox">
+			<div class="id"><img src="images/icon_id.png"><input type="email"  id="sLoginID" name="sLoginID" value="" onKeyPress="FormSubmitEn()" placeholder="ID"></div>
+			<div class="pw"><img src="images/icon_pw.png"><input type="password" id="sLoginPW" name="sLoginPW" value="" onKeyPress="FormSubmitEn()" placeholder="PW"></div>
+			<a href="javascript:FormSubmit();" class="btn gray" style="margin-bottom:30px;">로그인</a>
+			<div class="id_pw" style="display:none;">
+				<div class="left">
+					<input type="checkbox" checked id="sRemember" name="sRemember" checked><label for="sRemember"><span></span> ID/PW 저장</label>
+					<input type="checkbox" id="check_2"><label for="check_2"><span></span> 로그인 유지</label>
+				</div>
+				<a href="#" class="btn white">ID/PW 찾기</a>
+			</div>
+		</div>
+	</form>
+	<div class="login_bottom" id="DemoBtnBox">
+		<h3><b>처음</b>인가요?</h3>
+		<a href="javascript:MemberRegForm();" class="btn gray">회원가입</a>
+		<ul class="list_service">
+			<li onclick="javascript:OpenDemo();">
+				<img src="images/img_service_1.png">
+				<div>서비스 체험하기</div>
+			</li>
+			<li onclick="javascript:OpenGuideHome();">
+				<img src="images/img_service_2.png">
+				<div>서비스 안내</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+
+<div id="DivMain" style="display:;">
+	<div id="slide-out-left" class="side-nav">
+		<div class="side-cover">
+			<div class="cover-img">
+				<img src="images/sample_video.jpg" alt="">
+			</div>
+			<div class="prof-container">
+				<div class="avatar">
+					<img id="MemberPhotoImg" class="profile_img" src="">
+				</div>
+				<div class="profile-name" id="MemberName">
+					<!-- 회원 이름 -->
+				</div>
+			</div>
+		</div>
+		<ul class="collapsible" data-collapsible="accordion">
+			<form name="LogoutForm" method="post" id="LogoutForm" autocomplete="off"></form>
+			<li><a href="javascript:Logout();" class="txt_login"><i class="fa fa-user"></i> 로그아웃</a></li>
+			<!--
+			<li><a href="index.html"><i class="fa fa-home"></i> HOME</a></li>
+			-->
+			<!--
+			<li><a href="javascript:OpenVoucherForm();"><i class="fa fa-folder"></i> 이용권등록</a></li>
+			<li><a href="javascript:OpenVoucherList();"><i class="fa fa-folder"></i> 이용권구매</a></li>
+			<li><a href="javascript:OpenOrderList();"><i class="fa fa-folder-open"></i> 구매내역</a></li>
+			-->
+			<!--
+			<li><a href="javascript:OpenGuideHome();"><i class="fa fa-file-text-o"></i> 이용안내</a></li>
+			-->
+			<!--
+			<li><a href="#"><i class="fa fa-cog"></i> 설정</a></li>
+			-->
+		</ul>
+	</div>
+
+
+
+	<div class="top-navbar">
+		<div class="top-navbar-left">
+			<a href="#" id="menu-left" data-activates="slide-out-left">
+				<i class="fa fa-bars"></i>
+			</a>
+		</div>
+
+		<div class="site-title">
+			<h1>면접통</h1>
+		</div>
+	</div>
+
+	<div class="fixed_5060 bg_sea">
+		<div id="MainMain" class="">
+
+
+			<div id="slider1_container" style="position: relative; width: 0px; height: 0px;">
+
+							
+				<!-- Slides Container -->
+				<div id="slider1_container_elem1" data-u="slides" style="position: absolute; left: 0px; top: 0px; width: 0px; height: 0px; overflow: hidden;">
+					<!-- 배너 리스트 -->
+				</div>
+				<!-- Slides Container -->
+
+		        <!-- Thumbnail Item Skin Begin -->
+				<div id="slider1_container_elem2" data-u="thumbnavigator" class="jssort09" style="position: absolute; bottom: 0px; left: 0px; height:45px; width:0px; background-color: rgba(0,0,0,0); ">
+					<div id="slider1_container_elem3" data-u="slides">
+						<div data-u="prototype" style="POSITION: absolute; WIDTH: 100%; HEIGHT: 45px; TOP: 0; LEFT: 0; ">
+							<div data-u="thumbnailtemplate" style="font-family: verdana; font-weight: normal; POSITION: absolute; WIDTH: 100%; HEIGHT: 100%; TOP: 0; LEFT: 0; color:#fff; line-height: 45px; font-size:15px; padding-left:10px;"></div>
+						</div>
+					</div>
+				</div>
+				<!-- Thumbnail Item Skin Begin -->
+
+				<!--#region Bullet Navigator Skin Begin -->
+				<style>
+					.jssorb051 .i {position:absolute;cursor:pointer;}
+					.jssorb051 .i .b {fill:#fff;fill-opacity:0.5;stroke:#000;stroke-width:400;stroke-miterlimit:10;stroke-opacity:0.5;}
+					.jssorb051 .i:hover .b {fill-opacity:.7;}
+					.jssorb051 .iav .b {fill-opacity: 1;}
+					.jssorb051 .i.idn {opacity:.3;}
+				</style>
+				<div data-u="navigator" class="jssorb051" style="position:absolute;bottom:16px;right:10px;" data-scale="0.5" data-scale-bottom="0.75">
+					<div data-u="prototype" class="i" style="width:16px;height:16px;">
+						<svg viewBox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+							<circle class="b" cx="8000" cy="8000" r="5800"></circle>
+						</svg>
+					</div>
+				</div>
+				<!--#endregion Bullet Navigator Skin End -->
+				
+
+			</div>
+
+
+
+
+			<ul class="main_navi">
+				
+				<li id="BtnMyFavoriteList1">
+					<a href="javascript:OpenMyFavoriteList();">
+						<h2>면접 학습설계</h2>
+						<div>관심학과 5개를 선택해 주세요</div>
+						<span class="btn">GO</span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="javascript:OpenMyStudyCategoryList();">
+						<h2>면접 학습하기</h2>
+						<div>구매한 면접 콘텐츠 입니다</div>
+						<span class="btn">GO</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:OpenMyStudyIngList();">
+						<h2>학습중인 목록</h2>
+						<div>학습중인 면접 콘텐츠 입니다</div>
+						<span class="btn">GO</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:OpenMyStudyResultList();">
+						<h2>면접 결과보기</h2>
+						<div>완료한 학습 목록 입니다</div>
+						<span class="btn">GO</span>
+					</a>
+				</li>
+
+				<li id="BtnMyFavoriteList2">
+					<a href="javascript:OpenMyFavoriteList();">
+						<h2>면접 학습설계</h2>
+						<div>관심학과 변경을 원하시면 클릭해 주세요</div>
+						<span class="btn">GO</span>
+					</a>
+				</li>
+				
+			</ul>
+
+		</div>
+	</div>
+	<ul class="navi_bottom">
+		<li><a href="javascript:OpenNoticeList();"><img src="images/icon_bottom_1.png"><div>공지사항</div></a></li>
+		<li><a href="javascript:OpenMagazineList();"><img src="images/icon_bottom_2.png"><div>매거진</div></a></li>
+		<li><a href="javascript:OpenGuideHome();"><img src="images/icon_bottom_3.png"><div>이용안내</div></a></li>
+		<li><a href="javascript:OpenMemberForm();"><img src="images/icon_bottom_4.png"><div>마이페이지</div></a></li>
+	</ul>
+</div>
+
+
+<div id="floatdiv" style="display:none;">
+	<ul> 
+	<img src="images/favorite_icon.png" width="60px;">
+	</ul>
+</div>
+
+
+<div class="photo_box">
+	<div class="in">
+		<h4>사진변경</h4>
+		<div><a href="javascript:CaptureImageCallCamera();"><img src="images/btn_camera.png">사진촬영</a></div>
+		<div><a href="javascript:CaptureImageCallGallery();"><img src="images/btn_photo.png">사진첨부</a></div>
+	</div>
+</div>
+
+
+
+<div id="deviceready" style="display:none;"></div>
+<!-- ========================= javascript ========================= -->
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/video.js"></script>
+<script type="text/javascript" src="js/app_menu.js"></script>
+<script type="text/javascript" src="js/app_init.js"></script>
+<script type="text/javascript" src="js/jquery-confirm.min.js"></script>
+
+<script type="text/javascript" src="js/jssor.slider.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+
+//MainActivity 로 부터 호출되는 함수, Device 토큰을 받아온다. index.html 에 위치시킴
+function GetDeviceToken(ReceiveDeviceToken){
+	cookieMaster.setCookieValue(AppDomain, 'DeviceToken', ReceiveDeviceToken, function() {}, function(error) {});
+	localStorage.setItem(AppLocalStorageID+"DeviceToken", ReceiveDeviceToken);
+	DeviceToken = ReceiveDeviceToken;//Defalut 변수저장
+	//alert(DeviceToken);
+	SetDeviceToken();
+}
+function SetDeviceToken(){//서버저장
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	LocalDeviceToken = localStorage.getItem(AppLocalStorageID+"DeviceToken");
+
+	var JsonUrl = AppDomain + AppPath + "/jsonp_set_device_token_update.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+LocalMemberID+"&DeviceToken="+LocalDeviceToken+"&DeviceType=Android&callback=?";
+
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+		//alert(1);
+		//Success
+	}).fail(function() {
+		//Failure
+	});
+
+}
+//MainActivity 로 부터 호출되는 함수, Device 토큰을 받아온다. index.html 에 위치시킴
+
+
+function GetMemberInfo(MemberID){
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_member_info.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+		MemberID = data.MemberID;
+		LoginMemberID = data.LoginMemberID;
+		MemberName = data.MemberName;
+		MemberPhoto = data.MemberPhoto;
+		MemberLevelID = data.MemberLevelID;
+
+		if (MemberPhoto==""){
+			StrMemberPhoto = AppDomain + AppPath + "/images/NoPhoto.jpg";
+		}else{
+			StrMemberPhoto = AppDomain + "/uploads/member_photos/"+MemberPhoto;
+		}
+
+		document.getElementById("MemberName").innerHTML = MemberName;
+		document.getElementById("MemberPhotoImg").src = StrMemberPhoto;
+		document.getElementById("MemberPhotoImg").onerror = function(e) { e.target.src = AppDomain + AppPath + "/images/NoPhoto.jpg";};
+		//쿠기 저장
+		cookieMaster.setCookieValue(AppDomain, 'MemberID', MemberID, function() {}, function(error) {});
+		localStorage.setItem(AppLocalStorageID+"MemberID", MemberID);
+
+		cookieMaster.setCookieValue(AppDomain, 'CenterID', CenterID, function() {}, function(error) {});
+		localStorage.setItem(AppLocalStorageID+"CenterID", CenterID);
+		//쿠기 저장
+	}).fail(function() {
+		
+	});
+
+	if (MemberID==""){
+		location.href = "login_form.html";
+	}else{
+
+	}
+}
+
+
+function CaptureImageCallCamera(){//프로필 촬영
+	takePicture(Camera.PictureSourceType.CAMERA);
+}
+
+function CaptureImageCallGallery(){//프로필 갤러리 고르기
+	takePicture(Camera.PictureSourceType.PHOTOLIBRARY);
+}
+
+var file_path = null;
+/** 카메라 혹은 갤러리 호출 */
+function takePicture(source) {
+	// 표시영역을 비운다.
+	file_path = null;
+
+	// 메모리를 점유하고 있는 이전 데이터를 삭제한다.
+	navigator.camera.cleanup();
+
+	navigator.camera.getPicture(
+		// 사진 가져오기에 성공한 경우 호출될 함수
+		function(choice) {
+			// 사진파일의 경로를 전역변수에 보관한다.
+			file_path = choice;
+		
+			// Cordova의 WebView가 이미지를 캐시하는 것을 방지하기 위하여 파일 경로 뒤에 timestamp를 덧붙인다.
+			if (file_path.lastIndexOf('?') < 0) {
+				file_path += "?" + new Date().getTime();
+			}
+
+			//alert(file_path);
+			UploadImage(file_path);
+
+
+		},
+		// 사진 가져오기에 실패한 경우 호출될 함수
+		function(message) {
+			alert('Failed because: ' + message);
+		},
+		// 카메라,갤러리 호출 옵션
+		{
+			destinationType: Camera.DestinationType.FILE_URI, // 리턴타입 형식(파일경로)
+			encodingType: Camera.EncodingType.JPEG, // 이미지 형식
+			quality: 50, // 퀄리티 (0~100)
+			sourceType: source, // 카메라 or 갤러리 설정
+			allowEdit: false, // 가져오기 완료 후 편집 여부
+			correctOrientation: true // 카메라를 세로로 촬영한 경우 이미지 방향을 회전시킴
+		}
+	);
+}
+
+function UploadImage(ImageFilePath) {
+
+	var UploadImageSuccess = function (r) {
+		MemberPhoto = r.response;
+		UpdateMemberPhoto(MemberPhoto)
+		//alert("Code = " + r.responseCode);
+		//alert("Response = " + r.response);
+		//alert("Sent = " + r.bytesSent);
+		//document.getElementById("aaaa").value = r.response;
+	}
+
+	var UploadImageFail = function (error) {
+		//alert("An error has occurred: Code = " + error.code);
+		//alert("upload error source " + error.source);
+		//alert("upload error target " + error.target);
+	}
+
+	var UploadImageFilePath = ImageFilePath;
+	var UploadImageUri = encodeURI(AppDomain + AppPath + "/upload_image_action.php");
+
+	var UploadImageOptions = new FileUploadOptions();
+	UploadImageOptions.fileKey="file";
+	UploadImageOptions.fileName=UploadImageFilePath.substr(UploadImageFilePath.lastIndexOf('/')+1);
+	UploadImageOptions.mimeType="image/jpeg";
+
+	var UploadImageHeaders={'headerParam':'headerValue'};
+	UploadImageOptions.headers = UploadImageHeaders;
+
+	var Ft = new FileTransfer();
+	Ft.onprogress = function(progressEvent) {
+		var UploadProgress =  (progressEvent.loaded / progressEvent.total) * 100;
+		UploadProgress = Math.round(UploadProgress);
+
+		if (UploadProgress<1){
+			UploadProgress = 1;
+		}
+
+		if (UploadProgress>=100){
+
+		}
+	};
+
+	Ft.upload(UploadImageFilePath, UploadImageUri, UploadImageSuccess, UploadImageFail, UploadImageOptions);
+}
+
+function UpdateMemberPhoto(MemberPhoto){
+
+		//링크 열기 기록
+		var JsonUrl = AppDomain + AppPath + "/jsonp_set_member_photo_update.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+LocalMemberID+"&MemberPhoto="+MemberPhoto+"&callback=?";
+
+		$.getJSON( JsonUrl, {
+			format: "json"
+		})
+		.done(function( data ) {
+			document.getElementById("MemberPhotoImg").src = AppDomain + "/uploads/member_photos/"+MemberPhoto;
+			document.getElementById("MemberPhotoImg").onerror = function(e) { e.target.src = AppDomain + AppPath + "/images/NoPhoto.jpg";};
+		}).fail(function() {
+			
+		});
+		//링크 열기 기록
+
+}
+
+
+
+
+var MainAnCount = 0;
+var SliderWidth = 0;
+var SliderHeight = 0;
+function GetMainAd(MemberID){
+	
+	SliderWidth = window.innerWidth;
+	SliderHeight = (SliderWidth * 480) / 1080;
+
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_main_ad_list.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&SliderWidth="+SliderWidth+"&SliderHeight="+SliderHeight+"&callback=?";
+
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+
+		MainAnCount = data.MainAnCount;
+
+		if (MainAnCount>0){
+			document.getElementById("slider1_container").style.width = SliderWidth + "px";
+			document.getElementById("slider1_container").style.height = SliderHeight + "px";
+
+			document.getElementById("slider1_container_elem1").style.width = SliderWidth + "px";
+			document.getElementById("slider1_container_elem1").style.height = SliderHeight + "px";
+
+			document.getElementById("slider1_container_elem2").style.width = SliderWidth + "px";
+			document.getElementById("slider1_container_elem3").style.width = SliderWidth + "px";
+
+			document.getElementById("slider1_container_elem1").innerHTML = data.MainAdList;
+
+			jssor_slider1_init();
+		}
+		
+	
+	}).fail(function() {
+		
+	});
+}
+
+
+
+function OpenMainAdLink(link_url, AppMainAdID){
+
+	if (link_url!=""){
+
+		//링크 열기 기록
+		var JsonUrl = AppDomain + AppPath + "/jsonp_set_main_ad_log_update.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+LocalMemberID+"&AppMainAdID="+AppMainAdID+"&callback=?";
+
+		$.getJSON( JsonUrl, {
+			format: "json"
+		})
+		.done(function( data ) {
+			
+
+			//링크 열기
+			var Options = { dimBackground: true };
+			SpinnerPlugin.activityStart("Loading...", Options);
+
+			var close_listen_loop;
+			var NewWin=window.open( link_url, "_blank", "location=no");
+			NewWin.addEventListener( "loadstop", function(){
+				   close_listen_loop = window.setInterval(function(){
+					   NewWin.executeScript({
+							   code: "window.Exit"
+						   },
+						   function(values){
+							   if(values[0]){
+								 NewWin.close();
+							   }
+						   }
+					   );
+				   },1000);
+			});
+
+			NewWin.addEventListener( "exit", function(){
+				window.clearInterval(close_listen_loop);
+			});
+
+			NewWin.addEventListener( "loadstop", function(){
+				SpinnerPlugin.activityStop();
+			});
+
+			//링크 열기
+
+
+		}).fail(function() {
+			
+		});
+		//링크 열기 기록
+
+
+	}
+
+}
+
+
+//============================================== 로그인 / 로그아웃 ==============================================
+function FormSubmit(){
+	obj = document.LoginForm.sLoginID;
+	if (obj.value==""){
+		$.alert({title: '안내', content: '아이디를 입력하세요.'});
+		return;
+	}
+
+	obj = document.LoginForm.sLoginPW;
+	if (obj.value==""){
+		$.alert({title: '안내', content: '비밀번호를를 입력하세요.'});
+		return;
+	}
+
+	CheckMemberID();
+}
+
+
+function CheckMemberID(){
+	var Options = { dimBackground: true };
+	SpinnerPlugin.activityStart("Loading...", Options);
+
+	sLoginID = document.LoginForm.sLoginID.value;
+	sLoginPW = document.LoginForm.sLoginPW.value;
+
+	var JsonUrl = AppDomain + AppPath + "/jsonp_check_member_id.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&sLoginID="+sLoginID+"&sLoginPW="+sLoginPW+"&callback=?";
+
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+		
+		ErrNum = data.ErrNum;
+		MemberID = data.MemberID;
+
+		if (parseInt(ErrNum)==0){
+
+			//쿠기 저장
+			cookieMaster.setCookieValue(AppDomain, 'MemberID', MemberID, function() {}, function(error) {});
+			localStorage.setItem(AppLocalStorageID+"MemberID", MemberID);
+
+			cookieMaster.setCookieValue(AppDomain, 'CenterID', CenterID, function() {}, function(error) {});
+			localStorage.setItem(AppLocalStorageID+"CenterID", CenterID);
+			//쿠기 저장
+
+			
+			SpinnerPlugin.activityStop();
+			GetMainLoadInit();
+
+		}else{
+			SpinnerPlugin.activityStop();
+			$.alert({title: '안내', content: '아이디와 비밀번호가 일치하지 않습니다.'});
+			document.LoginForm.sLoginPW.value = "";
+			
+		}
+
+		
+
+	}).fail(function() {
+		SpinnerPlugin.activityStop();
+	});
+}
+
+
+
+function Logout(){
+
+	$.confirm({
+		title: '안내',
+		content: '로그아웃 하시겠습니까?',
+		buttons: {
+			확인: function () {
+				cookieMaster.setCookieValue(AppDomain, 'MemberID', "", function() {}, function(error) {});
+				localStorage.setItem(AppLocalStorageID+"MemberID", "");
+
+				GetLoginLoadInit();
+			},
+			취소: function () {
+				//취소
+			}
+		}
+	});
+
+}
+
+//============================================== 로그인 / 로그아웃 ==============================================
+
+function GetMainLoadInit(){
+	document.getElementById("DivBody").className = "";
+	document.getElementById("DivLoginForm").style.display = "none";
+	document.getElementById("DivMain").style.display = "block";
+	document.getElementById("MainMain").className = "animated fadeInUp";
+	document.getElementById("DivLoginForm").className = "";
+
+	document.LoginForm.sLoginID.value = "";
+	document.LoginForm.sLoginPW.value = "";		
+
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	//alert(LocalMemberID);	
+
+
+	//의왕시
+
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_interview_favorite_count.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+LocalMemberID+"&callback=?";
+	
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+		if (data.MemberFavoriteCount>=5){
+			document.getElementById("BtnMyFavoriteList1").style.display = "none";
+			document.getElementById("BtnMyFavoriteList2").style.display = "";
+		}else{
+			document.getElementById("BtnMyFavoriteList2").style.display = "none";
+			document.getElementById("BtnMyFavoriteList1").style.display = "";
+		}
+	}).fail(function() {
+		
+	});
+	//의왕시
+
+
+
+	GetMemberInfo(LocalMemberID);
+	GetMainAd(LocalMemberID);
+}
+
+function GetLoginLoadInit(){
+	document.getElementById("DivBody").className = "login";
+	document.getElementById("DivLoginForm").style.display = "block";
+	document.getElementById("DivMain").style.display = "none";
+	document.getElementById("DivLoginForm").className = "login_area animated fadeInUp";
+	document.getElementById("MainMain").className = "";
+	
+	document.LoginForm.sLoginID.value = "";
+	document.LoginForm.sLoginPW.value = "";
+
+}
+function onBackKeyDown() {
+	navigator.app.exitApp();
+}
+
+
+window.onload = function(){
+
+	// ======== 버전체크
+	CheckAppVersion();
+	// ======== 버전체크
+	
+	document.addEventListener("backbutton", onBackKeyDown, false);
+	
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	//alert(LocalMemberID);
+	if (LocalMemberID==null){
+		LocalMemberID = "";
+	}
+
+
+	if (LocalMemberID==""){
+		GetLoginLoadInit();
+	}else{
+		GetMainLoadInit();
+	}
+
+	//OpenIntro();
+}
+
+
+
+
+function OpenIntro(){
+	
+	var close_listen_loop;
+	NewWin=cordova.InAppBrowser.open( "intro.html", "_blank", "location=no");
+
+	//setTimeout(function() {
+	//	$('body').css('display', '');
+	//}, 2000);
+
+	$('body').css('display', 'none').fadeIn(500);
+
+	NewWin.addEventListener( "loadstop", function(){
+		   close_listen_loop = window.setInterval(function(){
+			   NewWin.executeScript({
+					   code: "window.Exit"
+				   },
+				   function(values){
+					   if(values[0]){
+						 
+						 NewWin.close();
+					
+					   }
+				   }
+			   );
+		   },200);
+	});
+
+	NewWin.addEventListener( "exit", function(){
+		window.clearInterval(close_listen_loop);
+		NewWindowClosed();
+	});
+}
+</script>
+
+
+
+<script>
+jssor_slider1_init = function () {
+	var _SlideshowTransitions = [
+		{ $Duration: 1200, x: -0.3, $During: { $Left: [0.3, 0.7] }, $Easing: { $Left: $Jease$.$InCubic, $Opacity: $Jease$.$Linear }, $Opacity: 2, $Outside: true }
+		, { $Duration: 1200, x: 0.3, $SlideOut: true, $Easing: { $Left: $Jease$.$InCubic, $Opacity: $Jease$.$Linear }, $Opacity: 2, $Outside: true }
+	];
+
+	var options = {
+		$AutoPlay: 1,
+		$AutoPlaySteps: 1,
+		$Idle: 4000,
+		$PauseOnHover: 1,
+		$ArrowKeyNavigation: 1,
+		$SlideDuration: 500,
+		$MinDragOffsetToSlide: 20,
+		//$SlideWidth: 600,
+		//$SlideHeight: 180,
+		$SlideSpacing: 0,
+		$UISearchMode: 1,
+		$PlayOrientation: 1,
+		$DragOrientation: 3,
+		$SlideshowOptions: {
+			$Class: $JssorSlideshowRunner$,
+			$Transitions: _SlideshowTransitions,
+			$TransitionsOrder: 1
+		},
+
+		$BulletNavigatorOptions: {
+			$Class: $JssorBulletNavigator$,
+			$ChanceToShow: 2,
+			$ActionMode: 3,
+			$Rows: 1, 
+			$SpacingX: 10,
+			$SpacingY: 10
+		},
+
+		$ArrowNavigatorOptions: {
+			$Class: $JssorArrowNavigator$,
+			$ChanceToShow: 1
+		},
+
+		$ThumbnailNavigatorOptions: {
+			$Class: $JssorThumbnailNavigator$,
+			$ChanceToShow: 2,
+			$ActionMode: 0,
+			$NoDrag: true, 
+			$Orientation: 2 
+		}
+	};
+
+	var jssor_slider1 = new $JssorSlider$('slider1_container', options);
+
+	
+	
+	
+	function ScaleSlider() {
+		var parentWidth = jssor_slider1.$Elmt.parentNode.clientWidth;
+		if (parentWidth){
+			jssor_slider1.$ScaleWidth(Math.min(parentWidth, 600));
+		}else{
+			$Jssor$.$Delay(ScaleSlider, 30);
+		}
+	}
+
+	//ScaleSlider();
+	//$Jssor$.$AddEvent(window, "load", ScaleSlider);
+	//$Jssor$.$AddEvent(window, "resize", ScaleSlider);
+	//$Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+};
+
+
+
+</script>
+
+
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        $('.profile_img').click(function () {
+            $('.photo_box').fadeIn(200);
+        });
+        $('.bg_change').click(function () {
+            $('.photo_box').fadeIn(200);
+        });
+        $('.photo_box').click(function () {
+            $('.photo_box').fadeOut(100);
+        });
+    });
+</script>
+<!-- ========================= javascript ========================= -->
+</body>
+</html>

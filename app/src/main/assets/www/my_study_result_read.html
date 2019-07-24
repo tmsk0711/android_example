@@ -1,0 +1,698 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>면접통</title>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/common_180722.css">
+	<link rel="stylesheet" type="text/css" href="css/video-js.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-confirm.min.css">
+	<link rel="stylesheet" type="text/css" href="css/circle-progress.css">
+
+
+
+	<!--- 로딩화면 --->
+	<style>
+	.page_loader {position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999;background: url('images/page_loading.png') 50% 50% no-repeat rgb(249,249,249); opacity: 0.9;}
+	</style>
+	<!--- 로딩화면 --->
+</head>
+
+<body>
+<!--- 로딩화면 --->
+<h3 class="page_loader"></h3>
+<!--- 로딩화면 --->
+
+<div class="top-navbar sea">
+	<div class="top-navbar-left">
+		<!--<a href="javascript:history.go(-1);">
+			<img src="images/btn_prev_white.png" class="btn_prev">
+		</a>-->
+	</div>
+
+	<div class="top-navbar-right">
+		<a>
+			<img src="images/btn_close.png" class="btn_close" onclick="history.go(-1);">
+		</a>
+	</div>
+
+	<div class="site-title">
+		<h1>면접결과보기</h1>
+	</div>
+</div>
+
+<div class="fixed_5060_nobottom bg_sea">
+	<div class="animated fadeInUp">
+		<ul class="tab_result">
+			<li class="active"><a href="#">내답변</a></li>
+			<li><a href="#">평가결과</a></li>
+			<li><a href="#">옵션</a></li>
+		</ul>
+
+		<div class="TabArea">
+			
+			<!-- ------- 탭 1 ------- -->
+			<ul style="display:block;padding-left:0px;">
+				<div class="video_area result">
+					<img src="" id="ProductInterviewDetailImageFileName" class="video hidden">
+					<div class="q_box">
+						<h5 id="ProductInterviewDetailNumber"><!--질문 01--></h5>
+						<div class="question" id="ProductInterviewDetailText"><!--당신은 우리 회사에 왜 지원하셨습니까? 또한, 당신은 어떤 사람입니까?--></div>
+					</div>
+					<div class="btn_area">
+						<div class="left">
+							<a href="javascript:GoPrev();" class="btn"><img src="images/btn_prev_white.png"> 이전</a>
+						</div>
+						<div class="right">
+							<a href="javascript:GoNext();" class="btn">다음 <img src="images/btn_next_white.png"></a>
+						</div>
+					</div>
+				</div>
+				<div class="pad_15">
+
+					<div class="result_area">
+
+						<div class="result_box fixed_reply">
+
+							<ul class="result_reply" style="display:block;">
+								
+								<li id="AnswerText" style="display:none;">
+									<div class="top">
+											<h4>텍스트 답변</h4>
+											<div class="answer" style="margin-top:10px;">
+												<div id="ResultUseInterviewDetailText" style="padding:20px 10px 20px 10px;background-color:#f1f1f1;"></div>
+											</div>                                        
+									</div>
+								</li>
+								<li id="AnswerVideo" style="display:none;">
+									<div class="top">
+											<h4>동영상 답변</h4>
+											<div class="answer">
+												<div class="recorder" style="margin-top:10px;">
+													<video id="PlayVideo" class="video-js" style="width:100%;height:auto;max-height:300px;background-color:#f1f1f1;" poster="images/img_record_1.png" controls="controls">
+														<source id="SourceVideo" src="" type="video/mp4">
+													</video>
+													<section>
+													<iframe src="" id="PlayVimeo" style="width:100%;display:none;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+													</section>
+												</div>
+											</div>
+									</div>
+								</li>
+								<li id="AnswerAudio" style="display:none;">
+									<div class="top" style="height:100px;">
+											<h4>음성 답변</h4>
+												<div class="answer">
+												<div class="recorder" style="margin-top:70px;">
+													<audio id="PlayAudio" class="video-js" style="width:100%;height:auto;background-color:#f1f1f1;" controls="controls">
+														<source id="SourceAudio1" src="" type="audio/ogg" />
+														<source id="SourceAudio2" src="" type="audio/mpeg" />
+													</audio>
+												</div>
+											</div>                                        
+									</div>
+								</li>
+								
+							</ul>
+
+						</div>
+					</div>
+				</div>
+			</ul>
+			<!-- ------- 탭 1 ------- -->
+
+			<!-- ------- 탭 2 ------- -->
+			<ul style="display:none;padding-left:0px;">
+				
+				<div id="AmtStatus1" class="top_study_no"  style="display:none;">
+					<img src="images/icon_option_click.png">
+					<h5>평가신청을 하지 않았습니다.<br>옵션탭을 눌러 신청할 수 있습니다.</h5>
+
+					<div class="guide_content_2" style="margin-bottom:50px;">
+						※ 전문가평가는 신청자에 한해 제공합니다.<br>
+						※ 앱을 통한 간략 보고서 제공<br>
+						※ 이메일을 통한 상세보고서 제공<br>
+					</div>
+				</div>
+				
+				<div id="AmtStatus2" class="result_chart" style="display:none;">
+
+					<div class="pop_progress_bar_2" style="text-align:center;margin-top:60px;">
+						<div class="c100 p1 big" id="DivAmtProgressBox" style="margin:0 auto;">
+							<span id="DivAmtProgress">0%</span>
+							<div class="slice">
+								<div class="bar"></div>
+								<div class="fill"></div>
+							</div>
+						</div>
+
+						<h6 id="AmtStatus2_Txt" style="none;margin-top:30px;"></h6>
+					</div>
+
+					
+				
+				</div>
+				
+				<div id="AmtStatus2_Btn" class="btn_fixed_2 animated fadeInUp" style="display:none;">
+					<a href="javascript:OpenAssessmentResult();" class="btn sea">평가결과 보기</a>
+				</div>
+
+			</ul>
+			<!-- ------- 탭 2 ------- -->
+			
+			<!-- ------- 탭 3 ------- -->
+			<ul style="display:none;padding-left:0px;">
+				<div class="top_study_complete">
+					<img src="images/icon_study_complete.png">
+					<h5>학습이 완료되었습니다.</h5>
+					학습결과는 단말기(폰)에 저장 됩니다.<br>
+					내 폰에 저장된 결과는 단말기 변경시 복구가 불가하므로<br>서버에 저장할 것을 권장합니다.<br>
+				</div>
+				<ul class="list_stydy_complete pad_15"  id="ResultUseInterviewInfoArea">
+					<!--  내용 -->
+				</ul>
+			</ul>
+			<!-- ------- 탭 3 ------- -->
+
+
+		</div>
+
+
+	</div>
+</div>
+
+
+
+<!----- 코칭신청 ------->
+<div class="pop_coching">
+	<div class="coching_in">
+		<div class="top">
+			<img src="images/btn_close_black.png" class="btn_close" onclick="CloseCoachingType()">
+			<br><b>코칭 신청 하기</b>
+		</div>
+
+		<div class="txt" style="padding-left:0px;">
+			<div style="width:90%;margin:20px auto;height:50px;line-height:50px;background-color:#295E8A;text-align:center;border-radius:5px;font-weight:bold;color:#ffffff;" onclick="ApplyCoaching(1)">문자 코칭</div>
+			<div style="width:90%;margin:10px auto;height:50px;line-height:50px;background-color:#295E8A;text-align:center;border-radius:5px;font-weight:bold;color:#ffffff;" onclick="ApplyCoaching(2)">전화 코칭</div>
+			<div style="width:90%;margin:20px auto;height:50px;line-height:50px;background-color:#295E8A;text-align:center;border-radius:5px;font-weight:bold;color:#ffffff;" onclick="ApplyCoaching(3)">대면 코칭</div>
+		</div>
+	</div>
+</div>
+<!----- 코칭신청 ------->
+
+
+<div id="UploadProgressBoxLayer" class="pop_progress_bar" style="display:none;text-align:center;">
+	<div class="c100 p1" id="DivUploadProgressBox" style="margin:0 auto; top:250px;">
+		<span id="DivUploadProgress">0%</span>
+		<div class="slice">
+			<div class="bar"></div>
+			<div class="fill"></div>
+		</div>
+	</div>
+</div>
+<style>
+html, body{height:100%;}
+.pop_progress_bar{position:fixed; text-align:center; width:100%; height:100%; top:0; left:0; right:0; bottom:0; background-color:rgba(0,0,0,0.3); z-index:110;}
+.pop_progress_bar_2{}
+</style>
+
+
+<style>
+section {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  height: auto;
+}
+
+section iframe,
+section object,
+section embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+
+
+
+<div style="display:none;">
+<audio id="my_audio" controls onended="play_audio('stop');">
+	<source id="my_audio_src" src="" type="audio/mpeg">
+</audio>
+</div>
+
+<!-- ========================= javascript ========================= -->
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/video.js"></script>
+<script type="text/javascript" src="js/app_menu.js"></script>
+<script type="text/javascript" src="js/app_init.js"></script>
+<script type="text/javascript" src="js/app_media_upload.js"></script>
+<script type="text/javascript" src="js/jquery-confirm.min.js"></script>
+
+<script type="text/javascript" src="vimeo/upload-cordova.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+var SavedServer = 0;//서버에 저장된 데이타 인지 여부
+var SameAppRegUID = 0;//기기에서 데이타를 삭제 또는 앱재설치 했는지 여부 1:동일앱 0:새로설치
+var PrevPage=1;
+var NextPage=2;
+var GetVideo = document.getElementById("PlayVideo");
+var GetVimeo = document.getElementById("PlayVimeo");
+var GetVideoSource = document.getElementById("SourceVideo");
+var GetAudio = document.getElementById("PlayAudio");
+var GetAudioSource1 = document.getElementById("SourceAudio1");
+var GetAudioSource2 = document.getElementById("SourceAudio2");
+var RecentVideoFileDefaultThumbnail = "images/img_record_1.png";
+
+//저장 신청 관련
+var MemberID = 0;
+var LocalTempResultUseInterviewID = 0;
+var ResultUseInterviewID = 0;
+var ServerSaved = "N";
+var TargetSaveVideo = "||";
+var TargetSaveAudio = "||";
+//저장 신청 관련
+
+
+function OpenAdPage(){
+	if (ResultUploading==1){
+		return false;
+	}else{
+		//location.href = "my_study_ad_page.html";
+	}
+}
+
+function onBackKeyDown() {
+	OpenAdPage();
+}
+
+
+function GetMemberInfoWebView(MemberID){
+	var json_url = AppDomain + AppPath + "/jsonp_get_member_info.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+
+	$.getJSON( json_url, {
+		format: "json"
+	})
+	.done(function( data ) {
+		MemberID = data.MemberID;
+		LoginMemberID = data.LoginMemberID;
+		MemberName = data.MemberName;
+		MemberLevelID = data.MemberLevelID;
+	}).fail(function() {
+		
+	});
+
+	if (MemberID==""){
+		webview.Close();
+	}
+
+}
+
+function GetVideoThumbnail(RecentVideoFilePath){
+	
+	navigator.createThumbnail(RecentVideoFilePath, function(err, imageData) {
+		if (err)
+			throw err;
+
+		RecentVideoFileThumbnail = "data:image/png;base64, " + imageData;
+		GetVideo.setAttribute("poster", RecentVideoFileThumbnail);
+	});
+	
+}
+
+
+function GetStudyResult(CurrentPage, ResultUseInterviewID){
+	$(".page_loader").fadeIn("slow");
+	MemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	//지금 학습해야 하는 면접 문제의 내용을 가져온다.
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_interview_result_read.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&ResultUseInterviewID="+ResultUseInterviewID+"&CurrentPage="+CurrentPage+"&callback=?";
+
+
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+
+		ResultUseInterviewDetailID = data.ResultUseInterviewDetailID;
+		ResultUseInterviewDetailType = data.ResultUseInterviewDetailType;
+		ResultUseInterviewDetailVideoFileName = data.ResultUseInterviewDetailVideoFileName;
+		ResultUseInterviewDetailVideoCode = data.ResultUseInterviewDetailVideoCode;
+		ResultUseInterviewDetailAudioFileName = data.ResultUseInterviewDetailAudioFileName;
+		ResultUseInterviewDetailVideoLocalFilePath = data.ResultUseInterviewDetailVideoLocalFilePath;
+		ResultUseInterviewDetailAudioLocalFilePath = data.ResultUseInterviewDetailAudioLocalFilePath;
+		ResultUseInterviewDetailVideoImageFileName = data.ResultUseInterviewDetailVideoImageFileName;
+		ResultUseInterviewDetailText = data.ResultUseInterviewDetailText;
+		ResultUseInterviewDetailMentorComment = data.ResultUseInterviewDetailMentorComment;
+		ResultUseInterviewDetailMentorScore = data.ResultUseInterviewDetailMentorScore;
+		ResultUseInterviewDetailMentorRecommend = data.ResultUseInterviewDetailMentorRecommend;
+
+		ProductInterviewDetailText = data.ProductInterviewDetailText;
+		ProductInterviewDetailAnswerExample = data.ProductInterviewDetailAnswerExample;
+		ProductInterviewDetailAudioFileName = data.ProductInterviewDetailAudioFileName;
+		ProductInterviewDetailImageFileName = data.ProductInterviewDetailImageFileName;
+		ProductInterviewDetailAnswerTime = data.ProductInterviewDetailAnswerTime;
+		ProductInterviewDetailAnswerTime = data.ProductInterviewDetailAnswerTime;
+
+		ResultUseInterviewAppRegUID = data.ResultUseInterviewAppRegUID;
+		ResultUseInterviewProgress = data.ResultUseInterviewProgress;
+		ResultUseInterviewApplySaveServer = data.ResultUseInterviewApplySaveServer;
+		ResultUseInterviewApplyCoaching = data.ResultUseInterviewApplyCoaching;
+		ResultUseInterviewApplyAssessment = data.ResultUseInterviewApplyAssessment;
+		ResultUseInterviewApplySaveServerDateTime = data.ResultUseInterviewApplySaveServerDateTime;
+		ResultUseInterviewApplyCoachingDateTime = data.ResultUseInterviewApplyCoachingDateTime;
+		ResultUseInterviewApplyAssessmentDateTime = data.ResultUseInterviewApplyAssessmentDateTime;
+
+		ResultUseInterviewDetailCount = data.ResultUseInterviewDetailCount;
+		ResultUseInterviewAssessmentCount = data.ResultUseInterviewAssessmentCount;
+		VimeoUploadComplete = data.VimeoUploadComplete;
+
+		if (CurrentPage==1){
+			PrevPage = 0;
+		}else if (CurrentPage>1){
+			PrevPage = CurrentPage-1;
+		}
+
+		if(CurrentPage == ResultUseInterviewDetailCount){
+			NextPage = 0;
+		}else if (CurrentPage<ResultUseInterviewDetailCount){
+			NextPage = CurrentPage+1;
+		}
+
+
+		//서버에 저장 되었다.
+		if (ResultUseInterviewApplySaveServer>0 || ResultUseInterviewApplyCoaching>0 || ResultUseInterviewApplyAssessment>0){
+			SavedServer = 1;
+		}
+		//서버에 저장 되었다.
+		//앱 데이타를 삭제 또는 앱재설치 안했다
+		if (ResultUseInterviewAppRegUID==AppRegUID){
+			SameAppRegUID = 1;
+		}
+		//앱 데이타를 삭제 또는 앱재설치 안했다
+
+	
+		if (ProductInterviewDetailAudioFileName!=""){
+			//document.getElementById("PlayerBtnBox").style.display = "";
+			
+			document.getElementById("my_audio_src").src = ProductInterviewDetailAudioFileName;
+			document.getElementById("my_audio").load();
+			//document.getElementById("my_audio").addEventListener("ended", function(){ play_audio('stop'); });
+
+			setTimeout(function(){
+				play_audio('play');
+			}, 2000);
+		
+		}
+
+		document.getElementById("ProductInterviewDetailImageFileName").src = ProductInterviewDetailImageFileName;
+		document.getElementById("ProductInterviewDetailNumber").innerHTML = "질문 " + CurrentPage;
+		document.getElementById("ProductInterviewDetailText").innerHTML = ProductInterviewDetailText;
+		document.getElementById("ResultUseInterviewDetailText").innerHTML = ResultUseInterviewDetailText;
+
+
+		if (ResultUseInterviewDetailVideoLocalFilePath!=""){
+			if (SavedServer==1 && VimeoUploadComplete==1){//서버 저장
+				GetVideo.style.display = "none";
+				GetVimeo.style.display = "";
+				document.getElementById("AnswerVideo").style.display = "block";
+				GetVimeo.setAttribute("src", "http://player.vimeo.com/video/"+ResultUseInterviewDetailVideoCode);
+				//GetVideo.setAttribute("poster", AppDomain+"/uploads/app_upload_video_thumbs/"+ResultUseInterviewDetailVideoImageFileName);
+				//GetVideo.load();
+			}else{
+				GetVideo.style.display = "";
+				GetVimeo.style.display = "none";
+				document.getElementById("AnswerVideo").style.display = "block";
+				GetVideoSource.setAttribute("src", ResultUseInterviewDetailVideoLocalFilePath);
+				GetVideo.load();
+				//GetVideoThumbnail(ResultUseInterviewDetailVideoLocalFilePath);
+			}
+		}else{
+			document.getElementById("AnswerVideo").style.display = "none";
+			GetVideoSource.setAttribute("src", "");
+			//GetVideo.setAttribute("poster", RecentVideoFileDefaultThumbnail);
+			GetVideo.load();
+		}
+
+		if (ResultUseInterviewDetailAudioLocalFilePath!=""){
+			if (SavedServer==1){//서버 저장
+				document.getElementById("AnswerAudio").style.display = "block";
+				GetAudioSource1.setAttribute("src", AppDomain+"/uploads/app_upload_audios/"+ResultUseInterviewDetailAudioFileName);
+				GetAudioSource2.setAttribute("src", AppDomain+"/uploads/app_upload_audios/"+ResultUseInterviewDetailAudioFileName);	
+				GetAudio.load();
+			}else{
+				document.getElementById("AnswerAudio").style.display = "block";
+				GetAudioSource1.setAttribute("src", ResultUseInterviewDetailAudioLocalFilePath);
+				GetAudioSource2.setAttribute("src", ResultUseInterviewDetailAudioLocalFilePath);
+				GetAudio.load();
+			}
+		}else{
+			document.getElementById("AnswerAudio").style.display = "none";
+			GetAudioSource1.setAttribute("src", "");
+			GetAudioSource2.setAttribute("src", "");
+			GetVideo.load();
+		}
+
+		if (ResultUseInterviewDetailText!=""){
+			document.getElementById("AnswerText").style.display = "block";
+		}else{
+			document.getElementById("AnswerText").style.display = "none";
+		}
+
+		$(".page_loader").fadeOut("slow");
+
+	}).fail(function() {
+		
+	});
+
+
+}
+
+
+function play_audio(task) {
+	if(task == 'play'){
+		document.getElementById("my_audio").play();
+		//document.getElementById("PlayerBtnPlay").style.display = "none";
+		//document.getElementById("PlayerBtnPause").style.display = "";
+	}
+	if(task == 'stop'){
+		//document.getElementById("my_audio").stop();
+
+		document.getElementById("my_audio").pause();
+		document.getElementById("my_audio").currentTime = 0;
+
+		//document.getElementById("PlayerBtnPause").style.display = "none";
+		//document.getElementById("PlayerBtnPlay").style.display = "";
+	}
+	if(task == 'pause'){
+		document.getElementById("my_audio").pause();
+		//document.getElementById("PlayerBtnPause").style.display = "none";
+		//document.getElementById("PlayerBtnPlay").style.display = "";
+	}
+ }
+
+
+
+function GetAssessmentStatus(){
+	
+	MemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	ResultUseInterviewID = localStorage.getItem(AppLocalStorageID+"TempResultUseInterviewID");
+
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_interview_result_assessment_status.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&ResultUseInterviewID="+ResultUseInterviewID+"&callback=?";
+
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+
+		ResultUseInterviewApplyAssessment = data.ResultUseInterviewApplyAssessment;
+		ResultUseInterviewAssessmentCount = data.ResultUseInterviewAssessmentCount;
+
+		AssessmentDisply(ResultUseInterviewApplyAssessment, ResultUseInterviewAssessmentCount);
+
+	}).fail(function() {
+		
+	});	
+
+
+	
+}
+
+
+function AssessmentDisply(ResultUseInterviewApplyAssessment, ResultUseInterviewAssessmentCount){
+
+	AssessmentMaxCount = 2;//2명이 평가하면 완료
+		
+	if (ResultUseInterviewApplyAssessment==0){//평가 신청전
+	
+		document.getElementById("AmtStatus1").style.display = "";
+		document.getElementById("AmtStatus2").style.display = "none";		
+	
+	}else{//평가 신청 완료
+
+		document.getElementById("AmtStatus1").style.display = "none";
+		document.getElementById("AmtStatus2").style.display = "";
+
+		if (ResultUseInterviewAssessmentCount==0){
+			
+			document.getElementById("AmtStatus2_Btn").style.display = "none";
+
+			document.getElementById("DivAmtProgressBox").className = "c100 p1 big";
+			document.getElementById("AmtStatus2_Txt").innerHTML = "평가가 시작되었습니다.";
+			document.getElementById("AmtStatus2_Btn").style.display = "none";
+
+		}else{
+			
+			document.getElementById("AmtStatus2_Btn").style.display = "";
+
+			ResultUseInterviewAssessmentPercent = ResultUseInterviewAssessmentCount * (100/AssessmentMaxCount);
+			if (ResultUseInterviewAssessmentPercent>100){
+				ResultUseInterviewAssessmentPercent=100;
+			}
+			document.getElementById("DivAmtProgressBox").className = "c100 p"+ResultUseInterviewAssessmentPercent+" big";
+			document.getElementById("DivAmtProgress").innerHTML = ResultUseInterviewAssessmentPercent +"%";
+
+			if (ResultUseInterviewAssessmentCount >= AssessmentMaxCount){
+				document.getElementById("AmtStatus2_Txt").innerHTML = "평가가 완료 되었습니다.";
+				document.getElementById("AmtStatus2_Btn").style.display = "";
+			}else{
+				document.getElementById("AmtStatus2_Txt").innerHTML = "평가가 "+ResultUseInterviewAssessmentPercent +"% 진행되었습니다.";
+				document.getElementById("AmtStatus2_Btn").style.display = "none";
+			}
+		}
+	}
+
+	if (ResultUseInterviewApplyAssessment==1 && ResultUseInterviewAssessmentCount < AssessmentMaxCount){
+		setTimeout("GetAssessmentStatus()", 5000);
+	}
+
+}
+
+
+function OpenAssessmentResult(){
+
+		ResultUseInterviewID = localStorage.getItem(AppLocalStorageID+"TempResultUseInterviewID");
+		
+		var Options = { dimBackground: true };
+		SpinnerPlugin.activityStart("Loading...", Options);
+
+		var close_listen_loop;
+		var NewWin=window.open( AppDomain+AppPath+"/assessment_read.php?RequestType=app&ResultUseInterviewID="+ResultUseInterviewID, "_blank", "location=no");
+		NewWin.addEventListener( "loadstop", function(){
+			   close_listen_loop = window.setInterval(function(){
+				   NewWin.executeScript({
+						   code: "window.Exit"
+					   },
+					   function(values){
+						   if(values[0]){
+							 NewWin.close();
+						   }
+					   }
+				   );
+			   },1000);
+		
+			   SpinnerPlugin.activityStop();
+		});
+
+		NewWin.addEventListener( "exit", function(){
+			window.clearInterval(close_listen_loop);
+		});
+
+}
+
+
+
+function GoPrev(){
+	LocalTempResultUseInterviewID = localStorage.getItem(AppLocalStorageID+"TempResultUseInterviewID");
+	
+	if (PrevPage==0){
+		$.alert({title: '안내', content: '첫번째 답변 입니다.'});
+	}else{
+		GetStudyResult(PrevPage, LocalTempResultUseInterviewID);
+	}
+}
+
+function GoNext(){
+	LocalTempResultUseInterviewID = localStorage.getItem(AppLocalStorageID+"TempResultUseInterviewID");
+	
+	if (NextPage==0){
+		$.alert({title: '안내', content: '마지막 답변 입니다.'});
+	}else{
+		GetStudyResult(NextPage, LocalTempResultUseInterviewID);
+	}
+}
+
+function ApplyMentor(){
+	$.alert({title: '안내', content: '멘토링 신청은 준비중 입니다.'});
+}
+
+
+
+window.onload = function(){
+	LocalTempResultUseInterviewID = localStorage.getItem(AppLocalStorageID+"TempResultUseInterviewID");
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	if (LocalMemberID==null){
+		LocalMemberID = "";
+	}
+
+	MemberID = LocalMemberID;
+	ResultUseInterviewID = LocalTempResultUseInterviewID;
+
+	GetMemberInfoWebView(LocalMemberID);
+	GetStudyResult(1, LocalTempResultUseInterviewID);
+	GetResultUseInterviewInfo(2); // js/app_media_upload.js
+	GetAssessmentStatus();
+}
+
+
+$(document).ready(function () {
+	document.addEventListener("backbutton", onBackKeyDown, false);
+
+	$('.tab_result > li').click(function () {
+		$('.tab_result > li').removeClass('active')
+		$(this).addClass('active');
+		var k = $(this).index();
+		$('.TabArea > ul').css('display', 'none');
+		$('.TabArea > ul').eq(k).fadeIn(300);
+	});
+
+
+	// 팝업 전문가 멘트
+	$('.btn_fixed_2 .btn').click(function(){
+		$('.pop_ment').fadeIn(300);
+	});
+	$('.pop_ment .btn_close').click(function () {
+		$('.pop_ment').fadeOut(300);
+	});
+	// 팝업 전문가 소개
+	$('.pop_ment .btn').click(function () {
+		$('.pop_expert').fadeIn(300);
+	});
+	$('.pop_expert .btn_close').click(function () {
+		$('.pop_expert').fadeOut(300);
+	});
+
+});
+
+
+</script>
+<!-- ========================= javascript ========================= -->
+
+</body>
+</html>

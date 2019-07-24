@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<title>면접통</title>
+	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/common_180722.css">
+	<link rel="stylesheet" type="text/css" href="css/video-js.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-confirm.min.css">
+</head>
+
+<body>
+
+
+<div class="top-navbar sky">
+	<div class="top-navbar-left">
+		<a>
+
+		</a>
+	</div>
+
+	<div class="top-navbar-right">
+		<a>
+			<img src="images/btn_close.png" class="btn_close" onclick="webview.Close();">
+		</a>
+	</div>
+
+	<div class="site-title">
+		<h1>학습중인목록</h1>
+	</div>
+</div>
+
+<div class="fixed_5060_nobottom bg_sky pad_15">
+	<div class="animated fadeInUp">
+		<div class="txt_guide">
+			<div class="top"><img src="images/icon_bang_sky.png">학습할 면접 콘텐츠를 선택하세요!</div>
+			<div class="down"><!--오늘학습가능수 : <b>2</b>개 / 평가가능수 <b>3</b>개--></div>
+		</div>
+		<ul class="list_cate_2" id="ProductInterviewList">
+			
+			<!--
+			<li>
+				<a href="my_study_form.html">
+					<img src="images/heart_on.png" class="heart">
+					<div class="title">
+						<h4>심층고강도면접학습입니다. <b>(3문항)</b></h4>
+						<div class="top"><span>학습진행수 : 0회</span>   평가진행 : 0회</span></div>
+						<div class="down"><span>찜 : 5명</span>   <span>추천답변 : 3개</span>   <span>랭킹답변 : 10개</span></div>
+					</div>
+					<img src="images/btn_go_sky.png" class="go">
+				</a>
+			</li>
+			<li>
+				<a href="my_study_form.html">
+					<img src="images/heart_on.png" class="heart">
+					<div class="title">
+						<h4>심층고강도면접학습입니다. <b>(3문항)</b></h4>
+						<div class="top"><span>학습진행수 : 0회</span>   평가진행 : 0회</span></div>
+						<div class="down"><span>찜 : 5명</span>   <span>추천답변 : 3개</span>   <span>랭킹답변 : 10개</span></div>
+					</div>
+					<img src="images/btn_go_sky.png" class="go">
+				</a>
+			</li>
+			<li>
+				<a href="my_study_form.html">
+					<img src="images/heart_on.png" class="heart">
+					<div class="title">
+						<h4>심층고강도면접학습입니다. <b>(3문항)</b></h4>
+						<div class="top"><span>학습진행수 : 0회</span>   평가진행 : 0회</span></div>
+						<div class="down"><span>찜 : 5명</span>   <span>추천답변 : 3개</span>   <span>랭킹답변 : 10개</span></div>
+					</div>
+					<img src="images/btn_go.png" class="go">
+				</a>
+			</li>
+			-->
+		</ul>
+	</div>
+</div>
+
+
+
+
+
+
+<!-- ========================= javascript ========================= -->
+<script type="text/javascript" src="cordova.js"></script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script type="text/javascript" src="js/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="js/slick.min.js"></script>
+<script type="text/javascript" src="js/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<script type="text/javascript" src="js/video.js"></script>
+<script type="text/javascript" src="js/app_menu.js"></script>
+<script type="text/javascript" src="js/app_init.js"></script>
+<script type="text/javascript" src="js/jquery-confirm.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+function GetMemberInfoWebView(MemberID){
+	var json_url = AppDomain + AppPath + "/jsonp_get_member_info.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+
+	$.getJSON( json_url, {
+		format: "json"
+	})
+	.done(function( data ) {
+		MemberID = data.MemberID;
+		LoginMemberID = data.LoginMemberID;
+		MemberName = data.MemberName;
+		MemberLevelID = data.MemberLevelID;
+	}).fail(function() {
+		
+	});
+
+	if (MemberID==""){
+		webview.Close();
+	}
+}
+
+function GetStudyList(MemberID){
+	var JsonUrl = AppDomain + AppPath + "/jsonp_get_interview_ing_list.php?AppRegUID="+AppRegUID+"&AppID="+AppID+"&AppDomain="+AppDomain+"&AppPath="+AppPath+"&CenterID="+CenterID+"&MemberID="+MemberID+"&callback=?";
+
+	$.getJSON( JsonUrl, {
+		format: "json"
+	})
+	.done(function( data ) {
+		document.getElementById("ProductInterviewList").innerHTML = data.ProductInterviewList;
+	}).fail(function() {
+		
+	});
+}
+
+function OpenProductInterviewForm(ProductInterviewID, ResultUseInterviewID){
+	$.confirm({
+		title: '안내',
+		content: '학습을 계속해서 진행 하시겠습니까?',
+		buttons: {
+			확인: function () {
+				localStorage.setItem(AppLocalStorageID+"TempProductInterviewID", ProductInterviewID);
+				localStorage.setItem(AppLocalStorageID+"TempResultUseInterviewID", ResultUseInterviewID);//0:시작 숫자:학습중, 완료된 학습
+				location.href = "my_study_form.html";
+			},
+			취소: function () {
+				//취소
+			}
+		}
+	});
+}
+
+
+window.onload = function(){
+
+	localStorage.setItem(AppLocalStorageID+"LocalTempDemoService", "0");//체험하기가 아닙니다.
+	
+	LocalMemberID = localStorage.getItem(AppLocalStorageID+"MemberID");
+	if (LocalMemberID==null){
+		LocalMemberID = "";
+	}
+	GetMemberInfoWebView(LocalMemberID);
+	GetStudyList(LocalMemberID);
+}
+</script>
+<!-- ========================= javascript ========================= -->
+
+</body>
+</html>
